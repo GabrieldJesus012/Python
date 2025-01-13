@@ -1,0 +1,7 @@
+nome= str(input('Qual é o seu nome completo? '))
+print ('Seu nome em maiusculo ',nome.upper())
+print ('Seu nome em Minusculo ',nome.lower())
+nomealt = nome.split()
+semespaco = (''.join(nomealt))
+print ('Seu nome tem ao todo ',len(semespaco))
+print ('Seu primeiro nome é {} e ele tem {} letras'.format(nomealt[0],len(nomealt[0])))
