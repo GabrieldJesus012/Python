@@ -5,3 +5,4 @@ print ("Seu ultimo nome é {}".format(nome[-1]))
 
 #ou
 print("Seu ultimo nome é {}".format(nome[len(nome)-1]))
+print(f'Seu ultimo nome é {nome[len(nome)-1]}')
