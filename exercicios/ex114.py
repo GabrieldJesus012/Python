@@ -1,17 +1,12 @@
-import requests
+import urllib
+import urllib.error
+import urllib.request 
 
-def verificar_site(url):
-    try:
-        resposta = requests.get(url)
-        if resposta.status_code == 200:
-            return True
-        else:
-            return False
-    except requests.exceptions.RequestException:
-        return False
-
-site = "https://www.pudim.com.br/"
-if verificar_site(site):
-    print(f"O site {site} está funcionando.")
-else:
-    print(f"O site {site} não está funcionando.")
+try:
+    url = "https://www.pudim.com.br/"
+    site = urllib.request.urlopen(url)
+except urllib.error.URLError:
+    print(f"O {url} não está acessivel no momento.")
+else: 
+    print(f"Consegui acessar o {url} ")
+    print(site.read()) #pegar o html do site.
