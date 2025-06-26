@@ -25,38 +25,50 @@ def menu(lista):
         c+=1
     print(linha())
     opc = leiaInt("Sua Opção: ")
+    return opc
 
-def cadastro ():
-    cabecalho("NOVO CADASTRO")
-    while True:
-        try:
-            nome = input("Nome: ").capitalize().strip()
-            if nome == "":
-                print("ERRO! Nome não pode ser vazio.")
-            else:
-                break
-        except KeyboardInterrupt:
-            print("\nUsuário preferiu não digitar o nome.")
-            return 
-    while True:
-        try:
-            idade = int(input("Idade: "))
-            break
-        except KeyboardInterrupt:
-            print("\nUsuário preferiu não digitar a idade.")
-            return 
-        except (ValueError, TypeError):
-            print("ERRO! Por favor, digite uma idade válida.")
-    with open("cadastro.txt", "a", encoding="utf-8") as arquivo:
-        arquivo.write(f"{nome:<30}{idade:>3} anos\n")
-    print(f"Registro de {nome} adicionado com sucesso!")
-    menu()
-
-def lerCadastro():
-    cabecalho("PESSOAS CADASTRADAS")
+#arquivo
+def arquivoExiste(nome):
     try:
-        with open("cadastro.txt", "r", encoding="utf-8") as arquivo:
-            print(arquivo.read())
+        a = open(nome,'rt')
+        a.close()
     except FileNotFoundError:
-        print("Nenhum cadastro encontrado ainda.")
-    menu()
+        return False
+    else:
+        return True
+
+def criarArquivo(nome):
+    try:
+        a = open(nome,'wt+') # o + é para criar
+        a.close()
+    except:
+        print("Houve um erro ao criar o arquivo")
+    else:
+        print(f'Arquivo {nome} criado com sucesso')
+
+def cadastro (arq,nome="Desconhecido",idade = 0):
+    try:
+        a = open(arq,'at') #adiciona algo ao arquivo
+    except:
+        print ("Houve um erro na abertura do arquivo")
+    else:
+        try:
+            a.write (f'{nome};{idade}\n')
+        except:
+            print("Houve um erro na hora de escrever os dados")
+        else: 
+            print(f"Registro de {nome} adicionado com sucesso!")
+
+def lerCadastro(nome):
+    try:
+        a = open(nome, 'rt')
+    except:
+        print("Erro ao ler o arquivo.")
+    else:
+        cabecalho("PESSOAS CADASTRADAS")
+        for linha in a:
+            dado =linha.split(';')
+            dado[1] = dado [1].replace('\n','')
+            print(f'{dado[0]:<30}{dado[1]:>3} anos')
+    finally:
+        a.close()
