@@ -1,8 +1,0 @@
-n1=int(input('Um valor: '))
-n2=int(input('Outro valor: '))
-print('A soma vale {}'.format(n1+n2))
-print('A mult vale {}'.format(n1*n2))
-print('A div vale {}'.format(n1/n2))
-print('A div inti vale {}'.format(n1//n2))
-print('A exp vale {}'.format(n1**n2))
-print ('teste de \n quebra de linha')
